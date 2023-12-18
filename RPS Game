@@ -1,0 +1,67 @@
+# Define validation function
+# Validation Rule: Must be a value of either rock, paper, or scissors
+def RPSValidate(player_input):
+    if player_input not in ['rock', 'paper', 'scissors']:
+        return 'input error'
+    return player_input
+
+#Define process function
+def RPSExecute(player1, player2):
+    if player1 == player2:
+        return 0
+    elif (player1 == 'rock' and player2 == 'scissors') \
+    or (player1 == 'paper' and player2 == 'rock') \
+    or (player1 == 'scissors' and player2 == 'paper'):
+        return 1
+    else:
+        return 2
+
+import sys
+
+# Allow the user three tries
+
+val1Count = 0
+val2Count = 0
+
+# Get User 1 input
+while val1Count<3:
+    # Get User Input
+    player1 = input('Enter Value for Player 1: ').lower()
+    
+    # Validate input and get return value
+    player1Validated = RPSValidate(player1)
+    
+    # Check validated input
+    if (player1Validated == 'input error'):
+        print ('Player 1 input incorrect. Try again.')
+        val1Count += 1
+    else:
+        break
+else:
+    sys.exit('Input Error. Exceeded maximum number of tries.')
+
+# Get User 2 input
+while val2Count<2:
+    # Get User Input
+    player2 = input('Enter Value for Player 2: ').lower()
+     
+    # Validate input and get return value
+    player2Validated = RPSValidate(player2)
+    
+    # Check validated input
+    if (player1Validated == 'input error'):
+        print ('Player 2 input incorrect. Try again.')
+        val2Count += 1
+    else:
+        break
+else:
+    sys.exit('Input Error. Exceeded maximum number of tries.')
+
+#Execute Process 
+result = RPSExecute(player1, player2)
+if result == 0:
+    print ('Players Tie')
+if result == 1:
+    print ('Player 1 Wins')
+if result == 2:
+    print ('Player 2 wins')
